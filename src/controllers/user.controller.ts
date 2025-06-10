@@ -9,7 +9,7 @@ import users from '../../data/users.json';
 const usersFilePath = path.join(__dirname, '../../data/users.json');
 
 export const createUser = (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
 
     // อ่าน users จากไฟล์
     const users: User[] = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
@@ -25,6 +25,7 @@ export const createUser = (req: Request, res: Response) => {
         id: users.length + 1,
         email,
         password: bcrypt.hashSync(password, 10),
+        name
     };
 
     // เพิ่ม user และเขียนลงไฟล์
